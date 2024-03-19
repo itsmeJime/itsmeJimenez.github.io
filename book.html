@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      background-image: url(head.jpg);
+      background-position: center;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: #ffffffb2;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 3px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    select {
+      width: 95%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #bookingNumber {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hotel Booking</h1>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="number">Contact Number:</label>
+        <input type="tel" id="number" name="number" required>
+      </div>
+      <div class="form-group">
+        <label for="bookingDate">Date of Booking:</label>
+        <input type="date" id="bookingDate" name="bookingDate" required>
+      </div>
+      <div class="form-group">
+        <label for="roomType">Select Room Type:</label>
+        <select id="roomType" name="roomType" required>
+          <option value="deluxe">Deluxe Suite - ₱3000</option>
+          <option value="family">Family Suite - ₱5800</option>
+          <option value="penthouse">Luxury Penthouse - ₱1600</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" onclick="generateBookingNumber()">click room for the number</button>
+        <p id="bookingNumber"></p>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" readonly>
+      </div>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+  
+      // Here you can add any form validation if needed
+  
+      // Open process.html in a new tab
+      window.open("process.html", "_blank");
+    });
+  
+    function generateBookingNumber() {
+      var bookingNumber = Math.floor(Math.random() * 200) + 1;
+      document.getElementById("bookingNumber").innerText = "Room Number: " + bookingNumber;
+    }
+  
+    document.getElementById("roomType").addEventListener("change", function() {
+      var roomType = this.value;
+      var amountField = document.getElementById("amount");
+  
+      switch (roomType) {
+        case "deluxe":
+          amountField.value = "₱3000";
+          break;
+        case "family":
+          amountField.value = "₱5800";
+          break;
+        case "penthouse":
+          amountField.value = "₱1600";
+          break;
+        default:
+          amountField.value = "";
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>
